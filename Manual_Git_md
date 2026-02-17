@@ -1,0 +1,106 @@
+# Manual de Instalación, Configuración y Uso Básico de Git con GitHub en Windows
+
+## Descripción
+Este manual documenta el proceso completo para comenzar a trabajar con Git y GitHub en un entorno Windows. Abarca desde la creación de una cuenta en GitHub, la configuración y uso básico de Git en local mediante Git Bash, hasta la conexión con un repositorio remoto y la subida de un proyecto a la plataforma.
+
+---
+
+## Requisitos Previos
+- Sistema operativo Windows 10 u 11
+- Navegador web actualizado
+- Git instalado en el sistema
+- Acceso a Internet
+- Cuenta en GitHub
+
+---
+
+## Sección 1: Creación de Cuenta en GitHub
+
+### Acceso al portal oficial de GitHub
+La página de inicio del portal oficial de GitHub muestra la interfaz de bienvenida, invitando al usuario a registrarse mediante la opción “Sign up” para comenzar a colaborar en proyectos de desarrollo de software.
+
+![Página principal de GitHub](img/j1.jpg)
+
+---
+
+### Opciones de registro rápido
+GitHub ofrece opciones de registro rápido que permiten vincular cuentas existentes de Google o Apple, facilitando y agilizando el proceso de creación de la cuenta.
+
+![Opciones de registro rápido](img/j3.jpg)
+
+---
+
+### Formulario de creación de cuenta
+El formulario de registro solicita la información necesaria para crear una cuenta:
+- Dirección de correo electrónico
+- Contraseña segura
+- Nombre de usuario único
+- Selección de región (México)
+
+Estos datos permiten personalizar la cuenta y cumplir con los requisitos de seguridad de la plataforma.
+
+![Formulario de registro](img/j2.png)
+
+---
+
+### Panel principal (Dashboard)
+Una vez iniciado sesión, se muestra el panel de control principal de GitHub. Desde esta interfaz es posible crear el primer repositorio, administrar proyectos y explorar repositorios públicos existentes.
+
+![Dashboard de GitHub](img/j4.jpg)
+
+---
+
+## Sección 2: Configuración y Versionado Local (Git Bash)
+
+### Configuración de identidad del usuario
+Antes de comenzar a trabajar con Git en el entorno local, es necesario configurar el correo electrónico que identificará al autor de los commits realizados desde el equipo.
+
+```
+git config --global user.email "correo@ejemplo.com"
+Este correo debe coincidir con el utilizado en la cuenta de GitHub.
+```
+![Dashboard de GitHub](img/j5.jpg)
+
+## Inicialización del repositorio local
+Se navega a la carpeta del proyecto y se inicializa el repositorio de Git. Posteriormente, se renombra la rama principal de master a main, siguiendo las convenciones actuales.
+
+```
+cd proyecto
+git init
+git branch -m main
+```
+![Dashboard de GitHub](img/j6.jpg)
+
+## Verificación del estado de los archivos
+El comando git status permite verificar el estado de los archivos del proyecto. En esta etapa, los archivos aparecen como Untracked files, indicando que Git los ha detectado pero aún no están bajo control de versiones.
+
+```
+git status
+```
+![Dashboard de GitHub](img/j7.jpg)
+
+## Preparación de archivos (Staging Area)
+Se agregan los archivos al área de preparación utilizando el comando git add .. Al volver a ejecutar git status, los archivos aparecen en verde, confirmando que están listos para ser confirmados.
+
+```
+git add .
+git status
+```
+![Dashboard de GitHub](img/j8.jpg)
+
+## Confirmación de cambios (Commit)
+Se realiza el primer commit del proyecto con un mensaje descriptivo, creando un punto de guardado en el historial del repositorio. En este caso, se registran 6 archivos insertados.
+
+```
+git commit -m "Inicio de Repositorio de bd para negocios digitales"
+```
+![Dashboard de GitHub](img/j9.jpg)
+
+## Sección 3: Conexión Remota y Despliegue
+Vinculación con el repositorio remoto
+Para enlazar el repositorio local con GitHub, se agrega un repositorio remoto utilizando un nombre personalizado en lugar del nombre por defecto origin.
+
+```
+git remote add Juanito https://github.com/usuario/repositorio.git
+```
+![Dashboard de GitHub](img/j10.jpg)
