@@ -80,3 +80,119 @@ ORDER BY [Importe] DESC
 
 
 --Nuevos joins con bdejemplos
+SELECT TOP 0 CategoryID, CategoryName
+INTO categoria
+FROM Categories
+
+ALTER TABLE categoria
+ADD CONSTRAINT pk_categoria
+PRIMARY KEY (CategoryID);
+
+INSERT INTO categoria
+VALUES ('C1'), ('C2'), ('C3'), ('C4'), ('C5');
+
+SELECT TOP 0 ProductID AS [numero_producto], ProductName AS [Nombre_producto], CategoryID AS [catego_id]
+INTO producto
+FROM Products;
+
+ALTER TABLE producto
+ADD CONSTRAINT pk_producto
+PRIMARY KEY (numero_producto);
+
+ALTER TABLE producto
+ADD CONSTRAINT fk_producto_categoria
+FOREIGN KEY (catego_id)
+REFERENCES categoria (CategoryID)
+ON DELETE CASCADE;
+
+INSERT INTO producto
+VALUES('p1', 1), ('p2', 2), ('p3', 3), ('p4', 4), ('p5', null), ('p6', null);
+
+SELECT *
+FROM categoria AS c
+inner join producto AS p
+ON c.CategoryID = p.catego_id;
+
+SELECT * 
+FROM categoria;
+
+SELECT *
+From [Order Details]
+
+SELECT *
+FROM producto;
+
+--left join
+SELECT *
+FROM categoria AS c
+left join producto AS p
+ON c.CategoryID = p.catego_id;
+
+--right join
+SELECT *
+FROM categoria AS c
+right join producto AS p
+ON c.CategoryID = p.catego_id;
+
+--full join
+SELECT *
+FROM categoria AS c
+FULL join producto AS p
+ON c.CategoryID = p.catego_id;
+
+--simular el right join del query anterior con un left join
+
+SELECT c.CategoryID, c.CategoryName, p.numero_producto, p.Nombre_producto, p.catego_id
+FROM categoria AS c
+right join producto AS p
+ON c.CategoryID = p.catego_id;
+
+SELECT c.CategoryID, c.CategoryName, p.numero_producto, p.Nombre_producto, p.catego_id
+FROM producto AS p
+left join categoria AS c
+ON c.CategoryID = p.catego_id;
+
+--visualizar todas las ctegorias que no tienen productos
+SELECT *
+FROM categoria AS c
+left join producto AS p
+ON c.CategoryID = p.catego_id
+WHERE numero_producto is null;
+
+--seleccionar todos los productos que no tienen categoria
+SELECT *
+FROM categoria AS c
+right join producto AS p
+ON c.CategoryID = p.catego_id
+WHERE c.CategoryID is null
+
+SELECT *
+FROM producto AS p
+left join categoria AS c
+ON c.CategoryID = p.catego_id
+WHERE c.CategoryID is null
+
+--guardar en una tabla de productos nuevos todos aquellos productos que fueron agregados recientemente y no estan 
+--en esta tabla de apoyo
+
+--Crear la tabla de products_new a partir de products mediante una consulta
+SELECT TOP 0
+ProductID AS [Product_number], ProductName AS [product_name], UnitPrice AS [Unit_price], UnitsInStock AS [Stock], (UnitPrice * UnitsInStock) AS [total]
+INTO products_new
+FROM Products
+
+ALTER TABLE products_new
+ADD CONSTRAINT pk_products_new
+PRIMARY KEY ([product_number])
+
+SELECT p.ProductID, p.ProductName, p.UnitPrice, p.UnitsInStock, (p.UnitPrice * p.UnitsInStock) AS [total], pw.*
+FROM Products AS p
+LEFT JOIN products_new AS pw
+ON p.ProductID = pw.product_number;
+
+INSERT INTO products_new
+SELECT p.ProductID, p.ProductName, p.UnitPrice, p.UnitsInStock, (p.UnitPrice * p.UnitsInStock) AS [total]
+FROM Products AS p
+LEFT JOIN products_new AS pw
+ON p.ProductID = pw.product_number
+WHERE pw.product_number is null
