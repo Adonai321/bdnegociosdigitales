@@ -196,3 +196,7 @@ FROM Products AS p
 LEFT JOIN products_new AS pw
 ON p.ProductID = pw.product_number
 WHERE pw.product_number is null
+
+
+--que termine con cualquiera de las sleytas a,c,e y que empiece con cualquiera de las letras a,c
+WHERE CompanyName like '[a,c]%[a,c,e]'

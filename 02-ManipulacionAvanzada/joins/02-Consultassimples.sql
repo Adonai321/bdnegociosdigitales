@@ -314,3 +314,4 @@ SELECT
 CustomerID, CompanyName, City, Region, Country
 FROM Customers
 WHERE (Country = 'USA'OR Country = 'CANADA') AND CompanyName LIKE 'B%';
+
