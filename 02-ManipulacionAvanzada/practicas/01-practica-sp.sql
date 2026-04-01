@@ -152,3 +152,32 @@ FROM TBLDetalleVenta
 
 SELECT *
 FROM TBLVenta
+
+
+--parte 2
+CREATE TYPE TipoDetalleVenta AS TABLE
+(
+    Id_Producto INT,
+    Cantidad INT
+);
+GO
+
+CREATE OR ALTER PROC usp_agregar_productos
+@Id_Cliente NCHAR(5),
+@Cantidad INT,
+@Tabla_Type TYPE 
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION
+            
+        COMMIT;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK;
+                PRINT 'Error en la venta';
+                PRINT ERROR_MESSAGE();
+                PRINT 'Linea: ' + CAST(ERROR_LINE() AS VARCHAR);
+    END CATCH
+END;
